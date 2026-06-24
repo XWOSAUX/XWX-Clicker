@@ -1,0 +1,390 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #14146e, #173589, #4494f5);
+    min-height: 100vh; /* чтобы градиент тянулся на весь экран */
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    background: rgba(0, 94, 255, 0.386);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 15px 30px;
+    color: white;
+    font-size: 18px;
+    font-family: system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: 1.05px;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translate(-50%, -100px);
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.div_glav_menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 230px;
+}
+
+.div_menu {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* для Safari */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 50px 50px;
+    border-radius: 30px;
+    box-sizing: border-box;
+}
+
+.div_two_btn {
+    gap: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.div_chislo {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    user-select: none;
+    color: rgb(32, 158, 255);
+}
+
+.btn_click {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 16px;
+    background: rgba(46, 213, 115, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(46, 213, 115, 0.3);
+}
+
+.btn_click:hover {
+    background: rgba(46, 213, 115, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(46, 213, 115, 0.5);
+}
+
+.btn_reload {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 16px;
+    background: rgba(255, 71, 87, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+}
+
+.btn_reload:hover {
+    background: rgba(255, 71, 87, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 71, 87, 0.5);
+}
+
+
+.div_btn_settings {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.p_settings {
+    font-size: 17px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    color: rgb(162, 125, 255);
+}
+
+.btn_settings {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 8px 8px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(128, 78, 255);
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+    transition: box-shadow 0.2s ease;
+}
+.btn_settings:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 92, 238, 0.5);
+    background-color: rgb(246, 97, 221);;
+}
+
+
+/* Фон-затемнитель */
+.modal-overlay {
+    display: none; /* изначально скрыто */
+    position: fixed; /* фиксированное положение относительно окна браузера */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* полупрозрачный чёрный */
+    z-index: 1000; /* чтобы было поверх всего */
+}
+
+/* Белое окно по центру */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* центрирование */
+    background-color: white 0.15;
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 650px; /* максимальная ширина (можно менять) */
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Заголовок и кнопка закрытия */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #b7b7b7;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    letter-spacing: 1.1px;
+    color: rgb(176, 94, 253);
+}
+.modal-close {
+    font-size: 32px;
+    cursor: pointer;
+    color: #ff33f1;
+}
+.modal-close:hover {
+    color: black;
+}
+
+
+/* Тело окна — сюда будешь добавлять элементы */
+.modal-body {
+    font-size: 16px;
+    color: #333;
+    margin-top: 22px;
+    display: flex;
+    gap: 20px;
+}
+
+.btn_w_settings {
+    padding: 10px 16px;
+    border: none;
+    background-color: rgb(172, 84, 245);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.btn_w_settings:hover {
+    background: rgb(36, 219, 255);
+    transform: translateY(-2px);
+}
+
+.btn_reset_settings {
+    padding: 10px 16px;
+    border: none;
+    background-color: rgb(0, 200, 255);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    margin-left: auto;
+    color:  rgb(102, 50, 246);
+}
+
+
+/* Анимация прыжка числа */
+.chislo-jump {
+    animation: jumpAnim 0.15s ease-out;
+}
+
+@keyframes jumpAnim {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+
+
+
+/* Стили магазина апгрейдов */
+
+
+.div_upgrade_shop {
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.menu_upgrade_shop {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* для Safari */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    width: 1000px;
+    padding: 20px 30px;
+}
+
+.text_upgrade_shop {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin-right: auto;
+    color: rgb(72, 192, 252);
+    text-shadow: 0 0 12px rgb(123, 72, 252);
+}
+
+
+.div_hr_and_btnushop {
+    display: flex;
+}
+
+.hr_ushop {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    border: 1px solid;
+    color: rgb(107, 105, 212);
+}
+
+.div_button_ushop {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 300px;
+    width: 300px;
+}
+
+.div_two_button_ushop {
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 300px;
+    width: 300px;
+}
+
+.btn_ushop {
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: rgb(2, 162, 255);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(46, 213, 115, 0.3);
+    max-height: 60px; /* чуть больше, чем две строки текста */
+    overflow: hidden; /* чтобы ничего не вылезало */
+    transition: transform 0.3s ease, 
+                background-color 0.5s ease, 
+                color 0.5s ease, 
+                max-height 0.4s ease;
+    min-height: 65px;   /* подгони под свой дизайн */
+    overflow: hidden;
+}
+
+.btn_ushop:hover {
+    transform: translateY(-2px);
+}
+
+
+
+
+
+.div_change_style {
+    border-top: 3px solid #b7b7b7;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.text_change_style {
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+    background: linear-gradient(to right, #ce46ff, #ffffff,#007bff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.div_cs_button {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    margin-top: 15px;
+}
+
+.div_cs_button_two {
+    display: flex;
+    gap: 100px;
+    margin-top: 15px;
+}
+
+.btn_style_1, .btn_style_2, .btn_style_3, .btn_style_4 {
+    width: 200px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn_style_1:hover, .btn_style_2:hover, .btn_style_3:hover, .btn_style_4:hover {
+    transform: translateY(-2px);
+}
