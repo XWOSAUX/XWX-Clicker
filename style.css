@@ -4,15 +4,72 @@
 }
 
 body {
-    background: linear-gradient(135deg, #14146e, #173589, #4494f5);
     min-height: 100vh; /* чтобы градиент тянулся на весь экран */
+    background: var(--bg-color);
 }
+
+
+
+
+/* ========== ТЕМЫ ========== */
+
+/* Базовая тема (тёмно-синяя) */
+:root {
+  --bg-color: linear-gradient(135deg, #14146e, #173589, #4494f5);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --text-color: rgb(32, 158, 255);
+  --text-xwosaux-color: rgb(162, 125, 255);
+  --shop-bg-color: rgba(255, 255, 255, 0.15);
+  --notification-bg-color: rgba(0, 94, 255, 0.386);
+  --text-shop-color: rgb(72, 192, 252);
+  --text-shadow-shop-color: 0 0 12px rgb(123, 72, 252);
+  --hr-color: rgb(107, 105, 212);
+  --btn-bg-color: rgb(2, 162, 255);
+}
+
+/* Светлая тема */
+[data-theme="light"] {
+  --bg-color: #f0f0f0;
+  --glass-bg: rgba(0, 0, 0, 0.1);
+  --text-color: #222;
+  --text-xwosaux-color: rgb(15, 15, 15);
+  --shop-bg-color: rgba(126, 133, 143, 0.311);
+  --notification-bg-color: rgba(0, 94, 255, 0.386);
+  --text-shop-color: rgb(50, 52, 53);
+  --text-shadow-shop-color: 0 0 12px rgb(0, 0, 0);
+  --hr-color: rgb(12, 12, 12);
+  --hr-box-shadow: rgb(13, 13, 13);
+  --btn-bg-color: rgba(29, 29, 29, 0.841);
+  --btn-shop-text-color: rgb(255, 255, 255);
+}
+
+
+/* Тёмная тема */
+[data-theme="dark"] {
+    --bg-color: #1c1a1e;
+    --glass-bg: #2a2a2a84;
+    --text-color: #ffffffb9;
+    --text-xwosaux-color: rgb(174, 174, 174);
+    --shop-bg-color: #2a2a2a84;
+    --notification-bg-color: #383636;
+    --text-shop-color: #cecece;
+    --text-shadow-shop-color: #938d8d;
+    --hr-color: rgb(170, 170, 170);
+    --hr-box-shadow: rgb(234, 234, 234);
+    --btn-bg-color: rgb(108, 104, 113);
+    --btn-shop-text-color: rgb(231, 231, 231);
+}
+
+
+
+
+
 
 .notification {
     position: fixed;
     top: 20px;
     left: 50%;
-    background: rgba(0, 94, 255, 0.386);
+    background: var(--notification-bg-color);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -46,7 +103,7 @@ body {
 }
 
 .div_menu {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px); /* для Safari */
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -62,13 +119,13 @@ body {
 }
 
 .div_chislo {
+    color: var(--text-color);
     display: flex;
     margin-bottom: 20px;
     justify-content: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 25px;
     user-select: none;
-    color: rgb(32, 158, 255);
 }
 
 .btn_click {
@@ -130,7 +187,7 @@ body {
     font-size: 17px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 600;
-    color: rgb(162, 125, 255);
+    color: var(--text-xwosaux-color);
 }
 
 .btn_settings {
@@ -142,13 +199,13 @@ body {
     font-size: 18px;
     cursor: pointer;
     color: white;
-    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+    box-shadow: 0 4px 12px rgba(2, 101, 250, 0.534);
     transition: box-shadow 0.2s ease;
 }
 .btn_settings:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(255, 92, 238, 0.5);
-    background-color: rgb(246, 97, 221);;
+    box-shadow: 0 6px 18px rgba(3, 226, 255, 0.37);
+    background-color: rgba(97, 181, 255, 0.805);
 }
 
 
@@ -201,7 +258,7 @@ body {
 }
 
 
-/* Тело окна — сюда будешь добавлять элементы */
+/* Тело окна — сюда добавлять элементы */
 .modal-body {
     font-size: 16px;
     color: #333;
@@ -258,7 +315,6 @@ body {
 
 /* Стили магазина апгрейдов */
 
-
 .div_upgrade_shop {
     display: flex;
     justify-content: center;
@@ -267,7 +323,7 @@ body {
 }
 
 .menu_upgrade_shop {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--shop-bg-color);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px); /* для Safari */
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -281,8 +337,8 @@ body {
     font-weight: 600;
     font-size: 20px;
     margin-right: auto;
-    color: rgb(72, 192, 252);
-    text-shadow: 0 0 12px rgb(123, 72, 252);
+    color: var(--text-shop-color);
+    text-shadow: 0 0 12px var(--text-shadow-shop-color);
 }
 
 
@@ -294,7 +350,8 @@ body {
     margin-top: 15px;
     margin-bottom: 30px;
     border: 1px solid;
-    color: rgb(107, 105, 212);
+    color: var(--hr-color);
+    box-shadow: 0 0 8px var(--hr-box-shadow);
 }
 
 .div_button_ushop {
@@ -322,7 +379,8 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 500;
     font-size: 18px;
-    background-color: rgb(2, 162, 255);
+    background-color: var(--btn-bg-color);
+    color: var(--btn-shop-text-color);
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(46, 213, 115, 0.3);
@@ -332,7 +390,7 @@ body {
                 background-color 0.5s ease, 
                 color 0.5s ease, 
                 max-height 0.4s ease;
-    min-height: 65px;   /* подгони под свой дизайн */
+    min-height: 65px;   
     overflow: hidden;
 }
 
@@ -373,7 +431,7 @@ body {
     margin-top: 15px;
 }
 
-.btn_style_1, .btn_style_2, .btn_style_3, .btn_style_4 {
+.btn_style_1, .btn_style_2, .btn_style_4 {
     width: 200px;
     padding: 10px 20px;
     border: none;
@@ -385,6 +443,6 @@ body {
     cursor: pointer;
 }
 
-.btn_style_1:hover, .btn_style_2:hover, .btn_style_3:hover, .btn_style_4:hover {
+.btn_style_1:hover, .btn_style_2:hover, .btn_style_4:hover {
     transform: translateY(-2px);
 }

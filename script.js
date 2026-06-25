@@ -7,9 +7,10 @@ const divMenu = document.getElementById('divMenu');
 const UpgradeShop = document.getElementById('divUpgradeShop');
 
 let odin = 0;
+let clickMultiplier = 1; // Сила одного клика
 
 btnAdd.addEventListener('click', () => {
-    odin++;
+    odin += clickMultiplier;
     divChislo.textContent = odin;
 
     if (odin === 10) {
@@ -110,32 +111,74 @@ function showNotification(text) {
     }, 3000);
 }
 
-// Все кнопки и их параметры — в одном месте
+// Все кнопки и их параметры в одном месте
 const shopUpgrades = {
     btnShopOne: {
         cost: 20,
         bought: false,
-        desc: '+$1 / 10 sec',   // описание, которое будет висеть после покупки
+        label: '?',
+        desc: '+$1 / 10 сек',
         action: function() {
-        setInterval(() => {
-            odin++;
-            divChislo.textContent = odin;
-            // Анимация прыжка, как при обычном клике
-            divChislo.classList.add('chislo-jump');
-            setTimeout(() => {
-                divChislo.classList.remove('chislo-jump');
-            }, 150);
-        }, 10000);
+            setInterval(() => {
+                odin++;
+                divChislo.textContent = odin;
+                divChislo.classList.add('chislo-jump');
+                setTimeout(() => divChislo.classList.remove('chislo-jump'), 150);
+            }, 10000);
         }
     },
     btnShopTwo: {
-         cost: 50, 
+        cost: 50,
         bought: false,
-        desc: 'Coming soon..' 
+        label: '?',
+        desc: 'Автокликер (+$1/сек)',
+        action: function() {
+            setInterval(() => {
+                odin++;
+                divChislo.textContent = odin;
+                divChislo.classList.add('chislo-jump');
+                setTimeout(() => divChislo.classList.remove('chislo-jump'), 150);
+            }, 1000);
+        }
     },
-    btnShopThree: { cost: 200, bought: false, desc: 'Coming soon..' },
-    btnShopFour:  { cost: 320, bought: false, desc: 'Coming soon..' },
-    btnShopFive:  { cost: 500, bought: false, desc: 'Coming soon..' }
+    btnShopThree: {
+        cost: 200,
+        bought: false,
+        label: '?',
+        desc: '+$5 / 5 сек',
+        action: function() {
+            setInterval(() => {
+                odin += 5;
+                divChislo.textContent = odin;
+                divChislo.classList.add('chislo-jump');
+                setTimeout(() => divChislo.classList.remove('chislo-jump'), 150);
+            }, 5000);
+        }
+    },
+    btnShopFour: {
+        cost: 320,
+        bought: false,
+        label: '?',
+        desc: 'Клик +$2',
+        action: function() {
+            // Просто меняем глобальную переменную силы клика
+            clickMultiplier = 2;
+        }
+    },
+    btnShopFive: {
+        cost: 500,
+        bought: false,
+        label: '?',
+        desc: '+$50 / 10 сек',
+        action: function() {
+            setInterval(() => {
+                odin += 50;
+                divChislo.textContent = odin;
+                divChislo.classList.add('chislo-jump');
+                setTimeout(() => divChislo.classList.remove('chislo-jump'), 150);
+            }, 10000);
+        }
+    }
 };
 
 
@@ -154,7 +197,7 @@ for (const [btnId, data] of Object.entries(shopUpgrades)) {
     });
     btn.addEventListener('mouseleave', () => {
         if (data.bought) return; // уже куплено — оставляем описание эффекта
-        btn.textContent = '?';
+        btn.textContent = data.label; // вмексто "?"
         btn.style.backgroundColor = '';
         btn.style.color = '';
     });
@@ -189,3 +232,19 @@ for (const [btnId, data] of Object.entries(shopUpgrades)) {
         }
     });
 }
+
+
+// ========== СМЕНА ТЕМ ==========
+const btnDarkBlue = document.querySelector('.btn_style_1');
+const btnDark = document.querySelector('.btn_style_2');
+const btnLight = document.querySelector('.btn_style_4');
+
+btnDarkBlue.addEventListener('click', () => {
+    document.documentElement.removeAttribute('data-theme');
+});
+btnDark.addEventListener('click', () => {
+    document.documentElement.setAttribute('data-theme', 'dark');
+});
+btnLight.addEventListener('click', () => {
+    document.documentElement.setAttribute('data-theme', 'light');
+});
