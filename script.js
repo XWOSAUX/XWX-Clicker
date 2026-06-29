@@ -1,6 +1,6 @@
 const divChislo = document.getElementById('divChislo');
 const btnAdd = document.getElementById('btnClick');
-const btnReload = document.getElementById('btnReload');
+const btnReset = document.getElementById('btnReset');
 const btnDizain = document.getElementById('btnDizain');
 const divMenu = document.getElementById('divMenu');
 
@@ -26,7 +26,7 @@ btnAdd.addEventListener('click', () => {
     }, 150);
 });
 
-btnReload.addEventListener('click', () => {
+btnReset.addEventListener('click', () => {
     odin = 0;
     divChislo.textContent = odin;
 });
@@ -237,7 +237,7 @@ for (const [btnId, data] of Object.entries(shopUpgrades)) {
 // ========== СМЕНА ТЕМ ==========
 const btnDarkBlue = document.querySelector('.btn_style_1');
 const btnDark = document.querySelector('.btn_style_2');
-const btnLight = document.querySelector('.btn_style_4');
+const btnLight = document.querySelector('.btn_style_3');
 
 btnDarkBlue.addEventListener('click', () => {
     document.documentElement.removeAttribute('data-theme');
