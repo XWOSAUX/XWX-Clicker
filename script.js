@@ -4,6 +4,13 @@ const btnReset = document.getElementById('btnReset');
 const btnDizain = document.getElementById('btnDizain');
 const divMenu = document.getElementById('divMenu');
 
+const dulClose = document.getElementById('dulClose');
+const divUpdateList = document.getElementById('divUpdateList');
+
+dulClose.addEventListener('click', () => {
+    divUpdateList.classList.add('hidden');
+})
+
 const UpgradeShop = document.getElementById('divUpgradeShop');
 
 let odin = 0;
@@ -116,8 +123,8 @@ const shopUpgrades = {
     btnShopOne: {
         cost: 20,
         bought: false,
-        label: '?',
-        desc: '+$1 / 10 сек',
+        label: '+1$ in 10 seconds',
+        desc: '+$1 / 10 sec',
         action: function() {
             setInterval(() => {
                 odin++;
@@ -130,8 +137,8 @@ const shopUpgrades = {
     btnShopTwo: {
         cost: 50,
         bought: false,
-        label: '?',
-        desc: 'Автокликер (+$1/сек)',
+        label: 'Autoclicker +$1/sec',
+        desc: 'Autoclicker (+$1/sec)',
         action: function() {
             setInterval(() => {
                 odin++;
@@ -144,8 +151,8 @@ const shopUpgrades = {
     btnShopThree: {
         cost: 200,
         bought: false,
-        label: '?',
-        desc: '+$5 / 5 сек',
+        label: '+5$ in 5 seconds',
+        desc: '+$5 / 5 sec',
         action: function() {
             setInterval(() => {
                 odin += 5;
@@ -158,8 +165,8 @@ const shopUpgrades = {
     btnShopFour: {
         cost: 320,
         bought: false,
-        label: '?',
-        desc: 'Клик +$2',
+        label: 'Click = +2$',
+        desc: 'Click +$2',
         action: function() {
             // Просто меняем глобальную переменную силы клика
             clickMultiplier = 2;
@@ -168,8 +175,8 @@ const shopUpgrades = {
     btnShopFive: {
         cost: 500,
         bought: false,
-        label: '?',
-        desc: '+$50 / 10 сек',
+        label: '+50$ in 10 seconds',
+        desc: '+$50 / 10 sec',
         action: function() {
             setInterval(() => {
                 odin += 50;
@@ -205,11 +212,11 @@ for (const [btnId, data] of Object.entries(shopUpgrades)) {
     // --- Клик (покупка) ---
     btn.addEventListener('click', () => {
         if (data.bought) {
-            showNotification('Это улучшение уже куплено!');
+            showNotification('This update has already been purchased!');
             return;
         }
         if (odin < data.cost) {
-            showNotification(`Недостаточно средств! Нужно ${data.cost}$.`);
+            showNotification(`Not enough cash! You need ${data.cost}$.`);
             return;
         }
 
@@ -224,7 +231,7 @@ for (const [btnId, data] of Object.entries(shopUpgrades)) {
         btn.style.backgroundColor = ''; // убираем затемнение, если оно было
         btn.style.color = '';           // возвращаем обычный цвет текста
 
-        showNotification(`Улучшение куплено! Потрачено -${data.cost}$.`);
+        showNotification(`Upgrade purchased! -${data.cost}$ Spent.`);
 
         // Запускаем эффект апгрейда, если он есть
         if (data.action) {
